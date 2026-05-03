@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: white;
+  text-align: center;
+}
+
+/* COVER */
+#cover {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  background: gold;
+  color: black;
+  font-weight: bold;
+  border-radius: 30px;
+}
+
+/* CONTENT */
+.section {
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.box {
+  background: #1c1c1c;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 15px;
+}
+
+img {
+  width: 90%;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
+/* ANIMASI */
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 1s;
+}
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<!-- COVER -->
+<div id="cover">
+  <h2>Undangan Pernikahan</h2>
+  <h1>asep ilyas saeful milah & ai siti rahmawati</h1>
+  <p>Kepada Yth. Tamu Undangan</p>
+  <button onclick="bukaUndangan()">Buka Undangan</button>
+</div>
+
+<!-- MUSIK -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<!-- CONTENT -->
+<div id="content" style="display:none;">
+
+<div class="section fade">
+  <h1>asep ilyas saepul milah & ai siti rahmawati</h1>
+  <p>Dengan hormat mengundang Anda ke acara pernikahan kami</p>
+</div>
+
+<div class="section box fade">
+  <h2>📅 07 juni 2026</h2>
+  <p>10 Januari 2027</p>
+</div>
+
+<div class="section box fade">
+  <h2>📍 https://maps.app.goo.gl/SD2KLbmzPeUiAhzp9</h2>
+  <iframe 
+    src="https://www.google.com/maps?q=-6.2,106.8&output=embed"
+    width="100%" height="200" style="border-radius:10px;">
+  </iframe>
+</div>
+
+<div class="section box fade">
+  <h2>📸 Galeri</h2>
+  <img src="https://picsum.photos/400/300">
+  <img src="https://picsum.photos/401/300">
+</div>
+
+<div class="section box fade">
+  <h2>💌 Ucapan</h2>
+  <p>Terima kasih atas doa dan kehadirannya</p>
+</div>
+
+</div>
+
+<script>
+function bukaUndangan() {
+  document.getElementById("cover").style.display = "none";
+  document.getElementById("content").style.display = "block";
+  document.getElementById("music").play();
+}
+
+/* animasi scroll */
+const faders = document.querySelectorAll(".fade");
+
+window.addEventListener("scroll", () => {
+  faders.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 50){
+      el.classList.add("show");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
