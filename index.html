@@ -1,600 +1,773 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hidayatul Ulum | Pondok Pesantren</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Hidayatul Ulum</title>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      scroll-behavior:smooth;
-      font-family:'Poppins',sans-serif;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    body{
-      background:#f7faf7;
-      color:#1e293b;
-      overflow-x:hidden;
-    }
+<style>
 
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
+:root{
+  --green:#14532d;
+  --green2:#166534;
+  --green3:#22c55e;
+  --white:#ffffff;
+  --soft:#f8faf8;
+  --text:#334155;
+}
 
-    /* NAVBAR */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
-    nav{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      padding:18px 7%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(255,255,255,0.85);
-      backdrop-filter:blur(10px);
-      z-index:999;
-      box-shadow:0 5px 20px rgba(0,0,0,0.05);
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .logo{
-      font-size:28px;
-      font-weight:700;
-      color:#166534;
-    }
+body{
+  background:var(--soft);
+  color:var(--text);
+  overflow-x:hidden;
+}
 
-    .menu{
-      display:flex;
-      gap:30px;
-    }
+/* NAVBAR */
 
-    .menu a{
-      font-size:15px;
-      font-weight:500;
-      transition:0.3s;
-    }
+nav{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:1000;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.4);
+}
 
-    .menu a:hover{
-      color:#16a34a;
-    }
+.logo{
+  font-size:1.3rem;
+  font-weight:700;
+  color:var(--green);
+  letter-spacing:1px;
+}
 
-    .btn{
-      padding:12px 24px;
-      background:#16a34a;
-      color:white;
-      border-radius:50px;
-      transition:0.3s;
-      display:inline-block;
-    }
+.menu{
+  display:flex;
+  gap:30px;
+}
 
-    .btn:hover{
-      background:#15803d;
-      transform:translateY(-2px);
-    }
+.menu a{
+  color:var(--text);
+  font-size:.95rem;
+  font-weight:500;
+  transition:.3s;
+}
 
-    /* HERO */
+.menu a:hover{
+  color:var(--green2);
+}
 
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:120px 7% 60px;
-      background:
-      linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0.7)),
-      url('https://images.unsplash.com/photo-1519491050282-cf00c82424b4?q=80&w=1200&auto=format&fit=crop') center/cover;
-    }
+.menu-btn{
+  display:none;
+  font-size:1.8rem;
+  color:var(--green);
+  cursor:pointer;
+}
 
-    .hero-text{
-      max-width:650px;
-    }
+/* HERO */
 
-    .hero-text h1{
-      font-size:65px;
-      line-height:1.1;
-      margin-bottom:20px;
-      color:#14532d;
-    }
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:130px 6% 80px;
+  position:relative;
+}
 
-    .hero-text p{
-      font-size:18px;
-      color:#475569;
-      line-height:1.8;
-      margin-bottom:35px;
-    }
+.hero::before{
+  content:'';
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:rgba(34,197,94,.08);
+  border-radius:50%;
+  filter:blur(80px);
+  top:-100px;
+  right:-100px;
+}
 
-    .hero-card{
-      width:350px;
-      background:white;
-      border-radius:30px;
-      padding:35px;
-      box-shadow:0 15px 40px rgba(0,0,0,0.08);
-    }
+.hero-container{
+  width:100%;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:60px;
+  align-items:center;
+}
 
-    .hero-card h3{
-      color:#166534;
-      margin-bottom:15px;
-      font-size:24px;
-    }
+.hero-text h1{
+  font-size:4rem;
+  line-height:1.1;
+  color:var(--green);
+  margin-bottom:25px;
+}
 
-    .hero-card p{
-      color:#64748b;
-      line-height:1.8;
-      margin-bottom:25px;
-    }
+.hero-text p{
+  font-size:1rem;
+  line-height:2;
+  color:#64748b;
+  margin-bottom:35px;
+  max-width:600px;
+}
 
-    /* SECTION */
+.hero-buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
 
-    section{
-      padding:100px 7%;
-    }
+.btn{
+  padding:15px 28px;
+  border-radius:100px;
+  text-decoration:none;
+  transition:.3s;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+}
 
-    .title{
-      text-align:center;
-      margin-bottom:60px;
-    }
+.btn-primary{
+  background:var(--green2);
+  color:white;
+}
 
-    .title h2{
-      font-size:42px;
-      color:#14532d;
-      margin-bottom:15px;
-    }
+.btn-primary:hover{
+  transform:translateY(-3px);
+  background:var(--green);
+}
 
-    .title p{
-      color:#64748b;
-      max-width:700px;
-      margin:auto;
-      line-height:1.8;
-    }
+.btn-outline{
+  border:1px solid #d1d5db;
+  color:var(--green);
+  background:white;
+}
 
-    /* ABOUT */
+.btn-outline:hover{
+  border-color:var(--green2);
+}
 
-    .about{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:40px;
-      align-items:center;
-    }
+.hero-card{
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.4);
+  padding:40px;
+  border-radius:35px;
+  box-shadow:0 20px 50px rgba(0,0,0,.05);
+}
 
-    .about img{
-      width:100%;
-      border-radius:25px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.08);
-    }
+.hero-card h3{
+  color:var(--green);
+  font-size:1.6rem;
+  margin-bottom:15px;
+}
 
-    .about-content h3{
-      font-size:34px;
-      color:#166534;
-      margin-bottom:20px;
-    }
+.hero-card p{
+  line-height:1.9;
+  color:#64748b;
+  margin-bottom:25px;
+}
 
-    .about-content p{
-      color:#64748b;
-      line-height:1.9;
-      margin-bottom:25px;
-    }
+/* SECTION */
 
-    /* PROGRAM */
+section{
+  padding:90px 6%;
+}
 
-    .program-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:25px;
-    }
+.section-title{
+  text-align:center;
+  margin-bottom:70px;
+}
 
-    .program-card{
-      background:white;
-      padding:35px;
-      border-radius:25px;
-      transition:0.4s;
-      box-shadow:0 8px 25px rgba(0,0,0,0.05);
-    }
+.section-title h2{
+  font-size:2.5rem;
+  color:var(--green);
+  margin-bottom:15px;
+}
 
-    .program-card:hover{
-      transform:translateY(-10px);
-    }
+.section-title p{
+  max-width:700px;
+  margin:auto;
+  line-height:2;
+  color:#64748b;
+}
 
-    .program-card h4{
-      color:#166534;
-      margin-bottom:15px;
-      font-size:22px;
-    }
+/* ABOUT */
 
-    .program-card p{
-      color:#64748b;
-      line-height:1.8;
-    }
+.about{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:50px;
+  align-items:center;
+}
 
-    /* STATS */
+.about-image img{
+  width:100%;
+  border-radius:35px;
+  object-fit:cover;
+  box-shadow:0 20px 50px rgba(0,0,0,.06);
+}
 
-    .stats{
-      background:#166534;
-      color:white;
-      border-radius:35px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:30px;
-      text-align:center;
-    }
+.about-content h3{
+  font-size:2rem;
+  color:var(--green);
+  margin-bottom:20px;
+}
 
-    .stat-box{
-      padding:50px 20px;
-    }
+.about-content p{
+  line-height:2;
+  color:#64748b;
+  margin-bottom:20px;
+}
 
-    .stat-box h2{
-      font-size:50px;
-      margin-bottom:10px;
-    }
+/* PROGRAM */
 
-    /* GALLERY */
+.program-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
 
-    .gallery{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:20px;
-    }
+.program-card{
+  background:white;
+  padding:35px;
+  border-radius:30px;
+  transition:.3s;
+  border:1px solid #eef2f7;
+}
 
-    .gallery img{
-      width:100%;
-      height:260px;
-      object-fit:cover;
-      border-radius:25px;
-      transition:0.4s;
-    }
+.program-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px rgba(0,0,0,.05);
+}
 
-    .gallery img:hover{
-      transform:scale(1.03);
-    }
+.program-card h4{
+  color:var(--green);
+  margin-bottom:15px;
+  font-size:1.2rem;
+}
 
-    /* FORM */
+.program-card p{
+  color:#64748b;
+  line-height:1.9;
+}
 
-    .form-box{
-      background:white;
-      padding:50px;
-      border-radius:30px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.05);
-      max-width:800px;
-      margin:auto;
-    }
+/* STATS */
 
-    .form-group{
-      margin-bottom:20px;
-    }
+.stats{
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  border-radius:40px;
+  padding:60px 30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:30px;
+  text-align:center;
+  color:white;
+}
 
-    .form-group input,
-    .form-group textarea,
-    .form-group select{
-      width:100%;
-      padding:16px;
-      border-radius:15px;
-      border:1px solid #d1d5db;
-      outline:none;
-      font-size:15px;
-    }
+.stat h2{
+  font-size:3rem;
+  margin-bottom:10px;
+}
 
-    textarea{
-      min-height:140px;
-      resize:none;
-    }
+/* GALLERY */
 
-    /* FOOTER */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
 
-    footer{
-      background:#14532d;
-      color:white;
-      padding:70px 7% 30px;
-      margin-top:100px;
-    }
+.gallery img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:30px;
+  transition:.4s;
+}
 
-    .footer-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:40px;
-      margin-bottom:50px;
-    }
+.gallery img:hover{
+  transform:scale(1.03);
+}
 
-    footer h3{
-      margin-bottom:20px;
-    }
+/* FORM */
 
-    footer p{
-      line-height:1.8;
-      color:#d1fae5;
-    }
+.form-container{
+  max-width:850px;
+  margin:auto;
+  background:white;
+  padding:45px;
+  border-radius:35px;
+  box-shadow:0 20px 50px rgba(0,0,0,.05);
+}
 
-    .copyright{
-      text-align:center;
-      border-top:1px solid rgba(255,255,255,0.2);
-      padding-top:25px;
-      color:#d1fae5;
-    }
+.form-group{
+  margin-bottom:20px;
+}
 
-    /* RESPONSIVE */
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  padding:17px 20px;
+  border-radius:18px;
+  border:1px solid #e2e8f0;
+  outline:none;
+  background:#f8fafc;
+  font-size:.95rem;
+}
 
-    @media(max-width:900px){
+.form-group textarea{
+  min-height:140px;
+  resize:none;
+}
 
-      .hero{
-        flex-direction:column;
-        text-align:center;
-        gap:50px;
-      }
+/* FOOTER */
 
-      .hero-text h1{
-        font-size:45px;
-      }
+footer{
+  margin-top:80px;
+  background:var(--green);
+  color:white;
+  padding:80px 6% 30px;
+  border-radius:50px 50px 0 0;
+}
 
-      .menu{
-        display:none;
-      }
+.footer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:40px;
+  margin-bottom:50px;
+}
 
-      .hero-card{
-        width:100%;
-      }
+.footer-grid h3{
+  margin-bottom:20px;
+}
 
-    }
-  </style>
+.footer-grid p{
+  line-height:2;
+  color:#d1fae5;
+}
+
+.copy{
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:25px;
+  text-align:center;
+  color:#dcfce7;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .hero-container{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding-top:120px;
+  }
+
+  .hero-text{
+    text-align:center;
+  }
+
+  .hero-text h1{
+    font-size:2.8rem;
+  }
+
+  .hero-text p{
+    margin:auto auto 30px;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .menu{
+    position:absolute;
+    top:85px;
+    right:6%;
+    background:white;
+    width:220px;
+    padding:25px;
+    border-radius:25px;
+    flex-direction:column;
+    display:none;
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+  }
+
+  .menu.active{
+    display:flex;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .section-title h2{
+    font-size:2rem;
+  }
+
+  .form-container{
+    padding:30px;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .hero-text h1{
+    font-size:2.2rem;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .hero-card{
+    padding:30px;
+  }
+
+  .section-title h2{
+    font-size:1.8rem;
+  }
+
+}
+
+</style>
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
+<!-- NAVBAR -->
 
-  <nav>
-    <div class="logo">Hidayatul Ulum</div>
+<nav>
 
-    <div class="menu">
-      <a href="#about">Profil</a>
-      <a href="#program">Program</a>
-      <a href="#gallery">Galeri</a>
-      <a href="#daftar">Pendaftaran</a>
-      <a href="#kontak">Kontak</a>
-    </div>
-  </nav>
+  <div class="logo">
+    Hidayatul Ulum
+  </div>
 
-  <!-- HERO -->
+  <div class="menu" id="menu">
+    <a href="#profil">Profil</a>
+    <a href="#program">Program</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#daftar">Pendaftaran</a>
+    <a href="#kontak">Kontak</a>
+  </div>
 
-  <section class="hero">
+  <div class="menu-btn" onclick="toggleMenu()">
+    ☰
+  </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-container">
 
     <div class="hero-text">
-      <h1>Pondok Pesantren Hidayatul Ulum</h1>
+
+      <h1>
+        Pondok Pesantren<br>
+        Hidayatul Ulum
+      </h1>
 
       <p>
-        Mencetak generasi islami, berakhlakul karimah,
-        berilmu luas dan siap menghadapi masa depan
-        dengan pendidikan agama serta teknologi modern.
+        Pendidikan islami modern dengan suasana nyaman,
+        disiplin, dan berorientasi pada akhlak,
+        ilmu pengetahuan serta teknologi masa depan.
       </p>
 
-      <a href="#daftar" class="btn">Daftar Sekarang</a>
+      <div class="hero-buttons">
+        <a href="#daftar" class="btn btn-primary">
+          Daftar Sekarang
+        </a>
+
+        <a href="#profil" class="btn btn-outline">
+          Lihat Profil
+        </a>
+      </div>
+
     </div>
 
     <div class="hero-card">
+
       <h3>Pendaftaran Santri Baru</h3>
 
       <p>
         Tahun ajaran baru telah dibuka.
-        Segera daftarkan putra-putri anda untuk
-        mendapatkan pendidikan terbaik di lingkungan islami.
+        Bergabunglah bersama lingkungan pendidikan islami
+        modern yang nyaman dan berkualitas.
       </p>
 
-      <a href="#daftar" class="btn">Mulai Pendaftaran</a>
+      <a href="#daftar" class="btn btn-primary">
+        Mulai Pendaftaran
+      </a>
+
     </div>
 
-  </section>
+  </div>
 
-  <!-- ABOUT -->
+</section>
 
-  <section id="about">
+<!-- PROFIL -->
 
-    <div class="title">
-      <h2>Profil Pondok</h2>
+<section id="profil">
+
+  <div class="section-title">
+    <h2>Profil Pondok</h2>
+
+    <p>
+      Pondok Pesantren Hidayatul Ulum hadir sebagai lembaga pendidikan
+      islam modern yang mengintegrasikan ilmu agama dan akademik.
+    </p>
+  </div>
+
+  <div class="about">
+
+    <div class="about-image">
+      <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop">
+    </div>
+
+    <div class="about-content">
+
+      <h3>
+        Pendidikan Islami Berkualitas
+      </h3>
 
       <p>
-        Pondok Pesantren Hidayatul Ulum hadir sebagai pusat pendidikan islam
-        modern yang menggabungkan ilmu agama, akademik, dan pembentukan karakter.
+        Kami menghadirkan sistem pendidikan yang fokus pada pembentukan
+        karakter islami, hafalan Al-Qur'an, kedisiplinan dan pengembangan teknologi.
       </p>
-    </div>
-
-    <div class="about">
-
-      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop">
-
-      <div class="about-content">
-        <h3>Pendidikan Islami Modern</h3>
-
-        <p>
-          Kami menghadirkan suasana belajar yang nyaman,
-          disiplin dan religius dengan fasilitas lengkap serta tenaga pengajar berpengalaman.
-        </p>
-
-        <p>
-          Fokus utama kami adalah mencetak santri yang hafal Al-Qur'an,
-          berprestasi akademik dan memiliki akhlak mulia.
-        </p>
-
-        <a href="#" class="btn">Selengkapnya</a>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- PROGRAM -->
-
-  <section id="program">
-
-    <div class="title">
-      <h2>Program Unggulan</h2>
-    </div>
-
-    <div class="program-grid">
-
-      <div class="program-card">
-        <h4>Tahfidz Al-Qur'an</h4>
-        <p>Program hafalan Al-Qur'an dengan metode modern dan target terukur.</p>
-      </div>
-
-      <div class="program-card">
-        <h4>Bahasa Arab & Inggris</h4>
-        <p>Pembelajaran bahasa aktif untuk mendukung pendidikan global.</p>
-      </div>
-
-      <div class="program-card">
-        <h4>Pendidikan Formal</h4>
-        <p>Kurikulum terpadu antara pendidikan nasional dan pesantren.</p>
-      </div>
-
-      <div class="program-card">
-        <h4>Teknologi & Digital</h4>
-        <p>Pembelajaran komputer dan teknologi untuk generasi masa depan.</p>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- STATS -->
-
-  <section>
-
-    <div class="stats">
-
-      <div class="stat-box">
-        <h2>1200+</h2>
-        <p>Santri Aktif</p>
-      </div>
-
-      <div class="stat-box">
-        <h2>50+</h2>
-        <p>Tenaga Pengajar</p>
-      </div>
-
-      <div class="stat-box">
-        <h2>20+</h2>
-        <p>Tahun Berdiri</p>
-      </div>
-
-      <div class="stat-box">
-        <h2>100%</h2>
-        <p>Lingkungan Islami</p>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- GALLERY -->
-
-  <section id="gallery">
-
-    <div class="title">
-      <h2>Galeri Pondok</h2>
-    </div>
-
-    <div class="gallery">
-
-      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop">
-      <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop">
-      <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?q=80&w=1200&auto=format&fit=crop">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop">
-
-    </div>
-
-  </section>
-
-  <!-- PENDAFTARAN -->
-
-  <section id="daftar">
-
-    <div class="title">
-      <h2>Pendaftaran Santri</h2>
 
       <p>
-        Isi formulir berikut untuk melakukan pendaftaran santri baru.
+        Dengan fasilitas modern serta tenaga pengajar profesional,
+        santri dibimbing menjadi generasi unggul dan berakhlakul karimah.
+      </p>
+
+      <a href="#" class="btn btn-primary">
+        Selengkapnya
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PROGRAM -->
+
+<section id="program">
+
+  <div class="section-title">
+    <h2>Program Unggulan</h2>
+  </div>
+
+  <div class="program-grid">
+
+    <div class="program-card">
+      <h4>Tahfidz Qur'an</h4>
+      <p>
+        Program hafalan Al-Qur'an dengan metode modern dan target berkualitas.
       </p>
     </div>
 
-    <div class="form-box">
-
-      <form>
-
-        <div class="form-group">
-          <input type="text" placeholder="Nama Lengkap">
-        </div>
-
-        <div class="form-group">
-          <input type="email" placeholder="Email">
-        </div>
-
-        <div class="form-group">
-          <input type="number" placeholder="Nomor WhatsApp">
-        </div>
-
-        <div class="form-group">
-          <select>
-            <option>Pilih Program</option>
-            <option>Tahfidz</option>
-            <option>Madrasah</option>
-            <option>Bahasa</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <textarea placeholder="Alamat Lengkap"></textarea>
-        </div>
-
-        <button class="btn">Kirim Pendaftaran</button>
-
-      </form>
-
+    <div class="program-card">
+      <h4>Bahasa Arab & Inggris</h4>
+      <p>
+        Pembelajaran bahasa aktif untuk menunjang komunikasi global.
+      </p>
     </div>
 
-  </section>
-
-  <!-- FOOTER -->
-
-  <footer id="kontak">
-
-    <div class="footer-grid">
-
-      <div>
-        <h3>Hidayatul Ulum</h3>
-
-        <p>
-          Pondok pesantren modern dengan pendidikan islami,
-          akademik dan teknologi untuk generasi masa depan.
-        </p>
-      </div>
-
-      <div>
-        <h3>Kontak</h3>
-
-        <p>📍 Indonesia</p>
-        <p>📞 +62 812 3456 7890</p>
-        <p>✉ info@hidayatululum.sch.id</p>
-      </div>
-
-      <div>
-        <h3>Sosial Media</h3>
-
-        <p>Instagram</p>
-        <p>Facebook</p>
-        <p>YouTube</p>
-      </div>
-
+    <div class="program-card">
+      <h4>Pendidikan Formal</h4>
+      <p>
+        Kurikulum terpadu antara pendidikan nasional dan pesantren.
+      </p>
     </div>
 
-    <div class="copyright">
-      © 2026 Hidayatul Ulum. All Rights Reserved.
+    <div class="program-card">
+      <h4>Teknologi Digital</h4>
+      <p>
+        Pembelajaran teknologi dan komputer untuk generasi masa depan.
+      </p>
     </div>
 
-  </footer>
+  </div>
+
+</section>
+
+<!-- STATS -->
+
+<section>
+
+  <div class="stats">
+
+    <div class="stat">
+      <h2>1200+</h2>
+      <p>Santri Aktif</p>
+    </div>
+
+    <div class="stat">
+      <h2>50+</h2>
+      <p>Tenaga Pengajar</p>
+    </div>
+
+    <div class="stat">
+      <h2>20+</h2>
+      <p>Tahun Berdiri</p>
+    </div>
+
+    <div class="stat">
+      <h2>100%</h2>
+      <p>Lingkungan Islami</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- GALERI -->
+
+<section id="galeri">
+
+  <div class="section-title">
+    <h2>Galeri Pondok</h2>
+  </div>
+
+  <div class="gallery">
+
+    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop">
+
+    <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop">
+
+    <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?q=80&w=1200&auto=format&fit=crop">
+
+    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop">
+
+  </div>
+
+</section>
+
+<!-- FORM -->
+
+<section id="daftar">
+
+  <div class="section-title">
+    <h2>Pendaftaran Santri</h2>
+
+    <p>
+      Isi formulir berikut untuk melakukan pendaftaran santri baru.
+    </p>
+  </div>
+
+  <div class="form-container">
+
+    <form>
+
+      <div class="form-group">
+        <input type="text" placeholder="Nama Lengkap">
+      </div>
+
+      <div class="form-group">
+        <input type="email" placeholder="Alamat Email">
+      </div>
+
+      <div class="form-group">
+        <input type="number" placeholder="Nomor WhatsApp">
+      </div>
+
+      <div class="form-group">
+        <select>
+          <option>Pilih Program</option>
+          <option>Tahfidz</option>
+          <option>Bahasa</option>
+          <option>Pendidikan Formal</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <textarea placeholder="Alamat Lengkap"></textarea>
+      </div>
+
+      <button class="btn btn-primary">
+        Kirim Pendaftaran
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer id="kontak">
+
+  <div class="footer-grid">
+
+    <div>
+      <h3>Hidayatul Ulum</h3>
+
+      <p>
+        Pondok pesantren modern dengan pendidikan islami,
+        akademik dan teknologi masa depan.
+      </p>
+    </div>
+
+    <div>
+      <h3>Kontak</h3>
+
+      <p>📍 Indonesia</p>
+      <p>📞 +62 812 3456 7890</p>
+      <p>✉ info@hidayatululum.sch.id</p>
+    </div>
+
+    <div>
+      <h3>Sosial Media</h3>
+
+      <p>Instagram</p>
+      <p>YouTube</p>
+      <p>Facebook</p>
+    </div>
+
+  </div>
+
+  <div class="copy">
+    © 2026 Hidayatul Ulum. All Rights Reserved.
+  </div>
+
+</footer>
+
+<script>
+
+function toggleMenu(){
+  document.getElementById('menu').classList.toggle('active');
+}
+
+</script>
 
 </body>
 </html>
