@@ -218,7 +218,8 @@
       font-weight:800;
       transition:.22s ease;
     }
-    .nav-link:hover{
+    .nav-link:hover,
+    .nav-link.active{
       transform:translateX(2px);
       border-color:rgba(11,107,56,.22);
       background:linear-gradient(90deg, rgba(11,107,56,.06), rgba(11,107,56,.02));
@@ -410,6 +411,61 @@
       color:var(--muted);
       line-height:1.7;
       max-width:780px;
+    }
+
+    /* Content pages that switch based on menu */
+    .content-section{
+      display:none;
+    }
+    .content-section.active{
+      display:block;
+    }
+
+    .content-wrap{
+      padding:22px;
+    }
+
+    .content-box{
+      background:linear-gradient(180deg, #ffffff, #f7fbf8);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .content-box h3{
+      margin:0 0 10px;
+      font-size:24px;
+      color:var(--green-dark);
+    }
+
+    .content-box p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .placeholder-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .placeholder-card{
+      padding:16px;
+      border-radius:18px;
+      background:#fff;
+      border:1px dashed rgba(11,107,56,.24);
+      color:var(--muted);
+      line-height:1.7;
+      min-height:92px;
+    }
+
+    .placeholder-card strong{
+      display:block;
+      color:var(--text);
+      margin-bottom:6px;
+      font-size:15px;
     }
 
     /* Gallery */
@@ -769,6 +825,9 @@
       .location-wrap{
         grid-template-columns:1fr;
       }
+      .placeholder-grid{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width: 768px){
@@ -863,7 +922,8 @@
       .gallery-wrap,
       .stats-wrap,
       .donation-wrap,
-      .location-wrap{
+      .location-wrap,
+      .content-wrap{
         padding:16px;
       }
 
@@ -940,13 +1000,15 @@
 
       .donation-card,
       .location-info,
-      .qris-card{
+      .qris-card,
+      .content-box{
         padding:16px;
         border-radius:18px;
       }
 
       .donation-card h3,
-      .location-info h3{
+      .location-info h3,
+      .content-box h3{
         font-size:20px;
       }
 
@@ -1137,17 +1199,17 @@
       <button class="drawer-close" id="menuClose" aria-label="Tutup menu">×</button>
     </div>
 
-    <nav class="nav-list">
-      <a class="nav-link" href="profil.html"><span>Profil Pondok</span><small></small></a>
-      <a class="nav-link" href="visi-misi.html"><span>Visi & Misi</span><small></small></small></a>
-      <a class="nav-link" href="program.html"><span>Program</span><small></small></a>
-      <a class="nav-link" href="kurikulum.html"><span>Kurikulum</span><small></small></a>
-      <a class="nav-link" href="ppdb.html"><span>PPDB</span><small></small></a>
-      <a class="nav-link" href="berita.html"><span>Berita</span><small></small></a>
-      <a class="nav-link" href="galeri.html"><span>Galeri</span><small></small></a>
-      <a class="nav-link" href="donasi.html"><span>Donasi</span><small></small></a>
-      <a class="nav-link" href="#lokasi"><span>Lokasi</span><small></small></a>
-      <a class="nav-link" href="#kontak"><span>Kontak</span><small></small></a>
+    <nav class="nav-list" id="navList">
+      <a class="nav-link" href="#profil" data-target="profil"><span>Profil Pondok</span><small></small></a>
+      <a class="nav-link" href="#visi-misi" data-target="visi-misi"><span>Visi & Misi</span><small></small></a>
+      <a class="nav-link" href="#program" data-target="program"><span>Program</span><small></small></a>
+      <a class="nav-link" href="#kurikulum" data-target="kurikulum"><span>Kurikulum</span><small></small></a>
+      <a class="nav-link" href="#ppdb" data-target="ppdb"><span>PPDB</span><small></small></a>
+      <a class="nav-link" href="#berita" data-target="berita"><span>Berita</span><small></small></a>
+      <a class="nav-link" href="#galeri" data-target="galeri"><span>Galeri</span><small></small></a>
+      <a class="nav-link" href="#donasi" data-target="donasi"><span>Donasi</span><small></small></a>
+      <a class="nav-link" href="#lokasi" data-target="lokasi"><span>Lokasi</span><small></small></a>
+      <a class="nav-link" href="#kontak" data-target="kontak"><span>Kontak</span><small></small></a>
     </nav>
 
     <div class="portal-box">
@@ -1171,11 +1233,11 @@
               <p class="hero-subtitle">
                 Selamat datang di Sistem Informasi Pondok Pesantren Hidayatul Uluum Awipari.
                 Website publik ini berisi informasi umum, galeri kegiatan, statistik pondok,
-                donasi, dan lokasi. 
+                donasi, dan lokasi.
               </p>
 
               <div class="hero-actions">
-                <a class="btn btn-primary" href="#galeri">Lihat Galeri</a>
+                <a class="btn btn-primary" href="#profil">Lihat Profil</a>
                 <a class="btn btn-outline" href="#lokasi">Lihat Lokasi</a>
                 <a class="btn btn-outline" href="https://example.com/login" target="_blank" rel="noopener">
                   🔐 Login Santri/Wali
@@ -1183,7 +1245,260 @@
               </div>
 
               <div class="hero-note">
-                 <strong style="margin-left:5px;"></strong>
+                <strong style="margin-left:5px;"></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFIL -->
+    <section class="block content-section active" id="profil">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Profil Pondok</h2>
+              <p class="section-subtitle">Silakan isi konten profil pondok secara manual di bagian ini.</p>
+            </div>
+          </div>
+
+          <div class="content-wrap">
+            <div class="content-box">
+              <h3>Profil Pondok Pesantren</h3>
+              <p>
+                Bagian ini disiapkan untuk Anda isi manual. Anda bisa menambahkan sejarah singkat,
+                struktur kepengurusan, fasilitas, dan informasi umum pondok.
+              </p>
+
+              <div class="placeholder-grid">
+                <div class="placeholder-card">
+                  <strong>Sejarah Singkat</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Struktur Pengurus</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Fasilitas</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Informasi Umum</strong>
+                  Isi manual di sini.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISI MISI -->
+    <section class="block content-section" id="visi-misi">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Visi & Misi</h2>
+              <p class="section-subtitle">Silakan isi visi, misi, dan tujuan pondok secara manual.</p>
+            </div>
+          </div>
+
+          <div class="content-wrap">
+            <div class="content-box">
+              <h3>Visi dan Misi Pondok</h3>
+              <p>
+                Section ini bisa Anda gunakan untuk menulis visi pondok, misi utama, serta tujuan pendidikan.
+              </p>
+
+              <div class="placeholder-grid">
+                <div class="placeholder-card">
+                  <strong>Visi</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Misi</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Tujuan</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Nilai Utama</strong>
+                  Isi manual di sini.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section class="block content-section" id="program">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Program</h2>
+              <p class="section-subtitle">Silakan isi program pendidikan, harian, mingguan, dan tahunan secara manual.</p>
+            </div>
+          </div>
+
+          <div class="content-wrap">
+            <div class="content-box">
+              <h3>Program Pondok</h3>
+              <p>
+                Tambahkan daftar program unggulan pondok, program santri, kegiatan keasramaan, dan program pembinaan.
+              </p>
+
+              <div class="placeholder-grid">
+                <div class="placeholder-card">
+                  <strong>Program Harian</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Program Mingguan</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Program Tahunan</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Program Unggulan</strong>
+                  Isi manual di sini.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KURIKULUM -->
+    <section class="block content-section" id="kurikulum">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Kurikulum</h2>
+              <p class="section-subtitle">Silakan isi kurikulum, jenjang, dan mata pelajaran secara manual.</p>
+            </div>
+          </div>
+
+          <div class="content-wrap">
+            <div class="content-box">
+              <h3>Kurikulum Pembelajaran</h3>
+              <p>
+                Anda bisa menulis daftar kitab, pelajaran umum, kelas, pembagian jenjang, atau metode pembelajaran di sini.
+              </p>
+
+              <div class="placeholder-grid">
+                <div class="placeholder-card">
+                  <strong>Jenjang Pendidikan</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Mata Pelajaran</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Metode Belajar</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Evaluasi</strong>
+                  Isi manual di sini.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PPDB -->
+    <section class="block content-section" id="ppdb">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">PPDB</h2>
+              <p class="section-subtitle">Silakan isi informasi pendaftaran santri baru secara manual.</p>
+            </div>
+          </div>
+
+          <div class="content-wrap">
+            <div class="content-box">
+              <h3>Penerimaan Peserta Didik Baru</h3>
+              <p>
+                Tempat ini cocok untuk menulis persyaratan, alur pendaftaran, jadwal seleksi, dan kontak panitia.
+              </p>
+
+              <div class="placeholder-grid">
+                <div class="placeholder-card">
+                  <strong>Syarat Pendaftaran</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Alur Pendaftaran</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Jadwal PPDB</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Kontak Panitia</strong>
+                  Isi manual di sini.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BERITA -->
+    <section class="block content-section" id="berita">
+      <div class="container">
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title">Berita</h2>
+              <p class="section-subtitle">Silakan isi berita, pengumuman, dan informasi terbaru secara manual.</p>
+            </div>
+          </div>
+
+          <div class="content-wrap">
+            <div class="content-box">
+              <h3>Berita & Pengumuman</h3>
+              <p>
+                Section ini disiapkan untuk menampilkan berita pondok, agenda kegiatan, dan pengumuman penting.
+              </p>
+
+              <div class="placeholder-grid">
+                <div class="placeholder-card">
+                  <strong>Berita 1</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Berita 2</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Pengumuman</strong>
+                  Isi manual di sini.
+                </div>
+                <div class="placeholder-card">
+                  <strong>Agenda</strong>
+                  Isi manual di sini.
+                </div>
               </div>
             </div>
           </div>
@@ -1192,15 +1507,13 @@
     </section>
 
     <!-- GALERI -->
-    <section class="block" id="galeri">
+    <section class="block content-section" id="galeri">
       <div class="container">
         <div class="section-card">
           <div class="section-head">
             <div>
               <h2 class="section-title">Galeri Kegiatan Pondok</h2>
-              <p class="section-subtitle">
-                
-              </p>
+              <p class="section-subtitle">Bagian galeri tetap aktif dan bisa Anda ganti isi gambarnya nanti.</p>
             </div>
           </div>
 
@@ -1244,15 +1557,13 @@
     </section>
 
     <!-- STATISTIK -->
-    <section class="block">
+    <section class="block content-section active" id="statistik" style="display:block;">
       <div class="container">
         <div class="section-card">
           <div class="section-head">
             <div>
               <h2 class="section-title">Statistik Pondok</h2>
-              <p class="section-subtitle">
-                
-              </p>
+              <p class="section-subtitle">Bagian statistik tetap tersedia di halaman depan.</p>
             </div>
           </div>
 
@@ -1285,15 +1596,13 @@
     </section>
 
     <!-- DONASI -->
-    <section class="block" id="donasi">
+    <section class="block content-section" id="donasi">
       <div class="container">
         <div class="section-card">
           <div class="section-head">
             <div>
               <h2 class="section-title">Donasi & Dukungan</h2>
-              <p class="section-subtitle">
-                
-              </p>
+              <p class="section-subtitle">Silakan isi data donasi, rekening, dan QRIS secara manual.</p>
             </div>
           </div>
 
@@ -1302,7 +1611,6 @@
               <h3>Rekening Donasi</h3>
               <p>
                 Mari dukung pendidikan, pembangunan, dan kegiatan pondok pesantren.
-                
               </p>
 
               <div class="donation-list">
@@ -1329,7 +1637,7 @@
                 <div class="qris-box">
                   <div>
                     <div style="font-size:28px;font-weight:900;">QRIS</div>
-                    <small><br/>atau ganti dengan file upload nanti.</small>
+                    <small>Silakan ganti area ini dengan gambar QRIS nanti.</small>
                   </div>
                 </div>
               </div>
@@ -1337,7 +1645,7 @@
               <div class="bank-box">
                 <strong>Catatan</strong>
                 <span>
-                  
+                  Silakan isi catatan donasi manual di bagian ini.
                 </span>
               </div>
             </div>
@@ -1353,9 +1661,7 @@
           <div class="section-head">
             <div>
               <h2 class="section-title">Lokasi Pondok</h2>
-              <p class="section-subtitle">
-                
-              </p>
+              <p class="section-subtitle">Bagian lokasi tetap ditampilkan seperti permintaan Anda.</p>
             </div>
           </div>
 
@@ -1363,7 +1669,7 @@
             <div class="location-info">
               <h3>Alamat Pondok</h3>
               <p>
-                
+                Silakan isi alamat lengkap, petunjuk arah, dan informasi akses lokasi secara manual.
               </p>
 
               <div class="location-meta">
@@ -1397,8 +1703,7 @@
     <footer id="kontak">
       <div class="container">
         <div class="footer-card">
-          <strong>Login Santri / Wali</strong>
-          <div></div></div>
+          <strong>Kontak & Login Santri / Wali</strong>
           <div class="footer-actions">
             <a class="btn btn-primary" href="https://example.com/login" target="_blank" rel="noopener">Masuk Portal</a>
             <a class="btn btn-outline" href="#beranda">Kembali ke Atas</a>
@@ -1417,6 +1722,8 @@
     const overlay = document.getElementById('overlay');
     const menuOpen = document.getElementById('menuOpen');
     const menuClose = document.getElementById('menuClose');
+    const navLinks = document.querySelectorAll('.nav-link[data-target]');
+    const contentSections = document.querySelectorAll('.content-section');
 
     function openMenu(){
       drawer.classList.add('active');
@@ -1430,9 +1737,45 @@
       document.body.style.overflow = '';
     }
 
+    function setActiveNav(targetId){
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.target === targetId);
+      });
+    }
+
+    function showSection(sectionId){
+      const target = document.getElementById(sectionId);
+      if (!target) return;
+
+      contentSections.forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none';
+      });
+
+      target.classList.add('active');
+      target.style.display = 'block';
+      setActiveNav(sectionId);
+
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      closeMenu();
+    }
+
     menuOpen.addEventListener('click', openMenu);
     menuClose.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.dataset.target;
+        if (!targetId) return;
+
+        e.preventDefault();
+        showSection(targetId);
+      });
+    });
+
+    // Default active section
+    setActiveNav('profil');
 
     // Gallery slider autoplay
     const slides = document.getElementById('slides');
