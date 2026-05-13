@@ -42,17 +42,7 @@
       transform:scale(1.02);
     }
 
-    body::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      background:
-        radial-gradient(circle at top, rgba(11,107,56,.16), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(255,255,255,.05), transparent 28%);
-      pointer-events:none;
-    }
-
+   
     a{text-decoration:none;color:inherit}
     img{display:block;max-width:100%}
 
