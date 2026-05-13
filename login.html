@@ -170,12 +170,7 @@
     const errorBox = document.getElementById("errorBox");
     const successBox = document.getElementById("successBox");
 
-    firebaseOnAuthStateChanged(firebaseAuth, (user) => {
-      if (user) {
-        window.location.href = "dashboard.html";
-      }
-    });
-
+   
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       errorBox.style.display = "none";
