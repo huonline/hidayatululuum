@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Ppdb</title>
+  <title>Admin Konten Pondok</title>
 
   <style>
     *{
@@ -47,7 +47,7 @@
       margin-bottom:14px;
     }
 
-    input{
+    input, select{
       width:100%;
       padding:14px 15px;
       margin-top:10px;
@@ -64,7 +64,7 @@
       color:rgba(255,255,255,.55);
     }
 
-    input:focus{
+    input:focus, select:focus{
       border-color:rgba(22,163,74,.55);
       box-shadow:0 0 0 3px rgba(22,163,74,.12);
     }
@@ -98,6 +98,17 @@
       margin-top:6px;
     }
 
+    .top-note{
+      margin-bottom:16px;
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(22,163,74,.10);
+      border:1px solid rgba(22,163,74,.18);
+      color:#dff7e7;
+      line-height:1.6;
+      font-size:14px;
+    }
+
     .news-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
@@ -105,7 +116,7 @@
       margin-top:10px;
     }
 
-    .berita-item{
+    .item-card{
       overflow:hidden;
       border-radius:18px;
       background:#16251d;
@@ -113,7 +124,7 @@
       box-shadow:0 12px 28px rgba(0,0,0,.16);
     }
 
-    .berita-item img{
+    .item-card img{
       width:100%;
       height:220px;
       object-fit:cover;
@@ -121,11 +132,11 @@
       background:#0b0f0d;
     }
 
-    .berita-body{
+    .item-body{
       padding:14px;
     }
 
-    .berita-body h3{
+    .item-body h3{
       margin-bottom:10px;
       font-size:17px;
       line-height:1.5;
@@ -133,7 +144,7 @@
       word-break:break-word;
     }
 
-    .berita-actions{
+    .item-actions{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
@@ -153,15 +164,24 @@
       line-height:1.7;
     }
 
-    .top-note{
-      margin-bottom:16px;
-      padding:14px 16px;
-      border-radius:16px;
-      background:rgba(22,163,74,.10);
-      border:1px solid rgba(22,163,74,.18);
-      color:#dff7e7;
-      line-height:1.6;
-      font-size:14px;
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .small{
+      font-size:12px;
+      opacity:.8;
+      margin-top:-8px;
+      margin-bottom:10px;
+      line-height:1.5;
+    }
+
+    @media (max-width: 768px){
+      .row{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width: 640px){
@@ -169,30 +189,51 @@
       h1{ font-size:24px; }
       .card{ padding:16px; border-radius:18px; }
       .news-grid{ gap:14px; }
-      .berita-item img{ height:200px; }
+      .item-card img{ height:200px; }
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Kelola Gambar</h1>
+    <h1>Kelola Konten Pondok</h1>
 
-  
-
-    <div class="card">
-      <h2>Tambah File</h2>
-
-      <input type="text" id="judul" placeholder="Judul " />
-      <input type="file" id="gambar" accept="image/*" />
-
-      <button id="saveBtn">Simpan Gambar</button>
-      <div class="muted">Kalau judul kosong atau gambar belum dipilih, data tidak akan disimpan.</div>
+    <div class="top-note">
+      Pilih menu, upload gambar, isi judul, lalu simpan. Data masuk ke Firebase Storage + Firestore. Tombol hapus akan menghapus data dan gambar sekalian.
     </div>
 
     <div class="card">
-      <h2>Daftar Gambar</h2>
-      <div id="beritaList" class="news-grid"></div>
+      <h2>Tambah Konten</h2>
+
+      <div class="row">
+        <div>
+          <select id="kategori">
+            <option value="berita">Berita</option>
+            <option value="galeri">Galeri</option>
+            <option value="profil">Profil</option>
+            <option value="visi-misi">Visi Misi</option>
+            <option value="kurikulum">Kurikulum</option>
+            <option value="ppdb">PPDB</option>
+          </select>
+          <div class="small">Pilih collection yang mau diisi.</div>
+        </div>
+
+        <div>
+          <input type="text" id="judul" placeholder="Judul konten" />
+          <div class="small">Judul akan tampil di web publik.</div>
+        </div>
+      </div>
+
+      <input type="file" id="gambar" accept="image/*" />
+
+      <button id="saveBtn">Simpan Konten</button>
+      <div class="muted">Wajib isi judul dan gambar. File gambar akan disimpan ke Storage.</div>
+    </div>
+
+    <div class="card">
+      <h2>Daftar Konten</h2>
+      <div class="small" id="currentInfo">Menampilkan: Berita</div>
+      <div id="kontenList" class="news-grid"></div>
     </div>
   </div>
 
@@ -213,13 +254,27 @@
     import {
       ref,
       uploadBytes,
-      getDownloadURL
+      getDownloadURL,
+      deleteObject
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-    const saveBtn = document.getElementById("saveBtn");
-    const beritaList = document.getElementById("beritaList");
+    const kategoriEl = document.getElementById("kategori");
     const judulInput = document.getElementById("judul");
     const gambarInput = document.getElementById("gambar");
+    const saveBtn = document.getElementById("saveBtn");
+    const kontenList = document.getElementById("kontenList");
+    const currentInfo = document.getElementById("currentInfo");
+
+    const LABELS = {
+      berita: "Berita",
+      galeri: "Galeri",
+      profil: "Profil",
+      "visi-misi": "Visi Misi",
+      kurikulum: "Kurikulum",
+      ppdb: "PPDB"
+    };
+
+    let unsubscribeCurrent = null;
 
     function escapeHtml(text) {
       return String(text)
@@ -232,11 +287,8 @@
 
     function formatTanggal(value) {
       if (!value) return "";
-
       const d = value.toDate ? value.toDate() : new Date(value);
-
       if (Number.isNaN(d.getTime())) return "";
-
       return new Intl.DateTimeFormat("id-ID", {
         day: "2-digit",
         month: "long",
@@ -244,97 +296,126 @@
       }).format(d);
     }
 
-    function renderEmptyState() {
-      beritaList.innerHTML = `
+    function renderEmptyState(label) {
+      kontenList.innerHTML = `
         <div class="empty-state" style="grid-column:1 / -1;">
-          Belum ada berita yang diupload.
+          Belum ada data pada <b>${label}</b>.
           <br>
           Upload gambar dan judul dari form di atas, nanti akan muncul otomatis di sini.
         </div>
       `;
     }
 
-    async function uploadGambar(file) {
+    async function uploadGambar(folder, file) {
       const fileName = `${Date.now()}-${file.name}`;
-      const storageRef = ref(storage, `berita/${fileName}`);
+      const storagePath = `${folder}/${fileName}`;
+      const storageRef = ref(storage, storagePath);
+
       await uploadBytes(storageRef, file);
-      return await getDownloadURL(storageRef);
+      const downloadURL = await getDownloadURL(storageRef);
+
+      return { downloadURL, storagePath };
     }
 
-    const beritaQuery = query(
-      collection(db, "berita"),
-      orderBy("tanggal", "desc")
-    );
+    function startListener() {
+      const kategori = kategoriEl.value;
+      const label = LABELS[kategori] || kategori;
 
-    onSnapshot(
-      beritaQuery,
-      (snap) => {
-        beritaList.innerHTML = "";
+      currentInfo.textContent = `Menampilkan: ${label}`;
+      kontenList.innerHTML = "";
 
-        if (snap.empty) {
-          renderEmptyState();
-          return;
-        }
+      if (unsubscribeCurrent) {
+        unsubscribeCurrent();
+        unsubscribeCurrent = null;
+      }
 
-        snap.forEach((docSnap) => {
-          const data = docSnap.data();
+      const q = query(
+        collection(db, kategori),
+        orderBy("tanggal", "desc")
+      );
 
-          const card = document.createElement("article");
-          card.className = "berita-item";
+      unsubscribeCurrent = onSnapshot(
+        q,
+        (snap) => {
+          kontenList.innerHTML = "";
 
-          const img = document.createElement("img");
-          img.src = data.gambar || "";
-          img.alt = data.judul || "Berita Pondok";
-          img.loading = "lazy";
-
-          const body = document.createElement("div");
-          body.className = "berita-body";
-
-          const title = document.createElement("h3");
-          title.innerHTML = escapeHtml(data.judul || "Tanpa Judul");
-
-          const tanggal = document.createElement("div");
-          tanggal.style.marginBottom = "10px";
-          tanggal.style.fontSize = "12px";
-          tanggal.style.opacity = "0.8";
-          tanggal.textContent = formatTanggal(data.tanggal);
-
-          const actions = document.createElement("div");
-          actions.className = "berita-actions";
-
-          const delBtn = document.createElement("button");
-          delBtn.className = "delete-btn";
-          delBtn.textContent = "Hapus";
-          delBtn.dataset.id = docSnap.id;
-
-          delBtn.addEventListener("click", async () => {
-            const ok = confirm("Yakin mau hapus berita ini?");
-            if (!ok) return;
-
-            await deleteDoc(doc(db, "berita", docSnap.id));
-          });
-
-          body.appendChild(title);
-
-          if (tanggal.textContent) {
-            body.appendChild(tanggal);
+          if (snap.empty) {
+            renderEmptyState(label);
+            return;
           }
 
-          actions.appendChild(delBtn);
-          body.appendChild(actions);
+          snap.forEach((docSnap) => {
+            const data = docSnap.data();
 
-          card.appendChild(img);
-          card.appendChild(body);
+            const card = document.createElement("article");
+            card.className = "item-card";
 
-          beritaList.appendChild(card);
-        });
-      },
-      () => {
-        renderEmptyState();
-      }
-    );
+            const img = document.createElement("img");
+            img.src = data.gambar || "";
+            img.alt = data.judul || label;
+            img.loading = "lazy";
+
+            const body = document.createElement("div");
+            body.className = "item-body";
+
+            const title = document.createElement("h3");
+            title.innerHTML = escapeHtml(data.judul || "Tanpa Judul");
+
+            const tanggal = document.createElement("div");
+            tanggal.style.marginBottom = "10px";
+            tanggal.style.fontSize = "12px";
+            tanggal.style.opacity = "0.8";
+            tanggal.textContent = formatTanggal(data.tanggal);
+
+            const actions = document.createElement("div");
+            actions.className = "item-actions";
+
+            const delBtn = document.createElement("button");
+            delBtn.className = "delete-btn";
+            delBtn.textContent = "Hapus";
+
+            delBtn.addEventListener("click", async () => {
+              const ok = confirm(`Yakin mau hapus data ${label} ini?`);
+              if (!ok) return;
+
+              try {
+                if (data.storagePath) {
+                  await deleteObject(ref(storage, data.storagePath));
+                }
+
+                await deleteDoc(doc(db, kategori, docSnap.id));
+                alert("Data berhasil dihapus.");
+              } catch (error) {
+                console.error(error);
+                alert("Gagal menghapus data.");
+              }
+            });
+
+            body.appendChild(title);
+
+            if (tanggal.textContent) {
+              body.appendChild(tanggal);
+            }
+
+            actions.appendChild(delBtn);
+            body.appendChild(actions);
+
+            card.appendChild(img);
+            card.appendChild(body);
+
+            kontenList.appendChild(card);
+          });
+        },
+        () => {
+          renderEmptyState(label);
+        }
+      );
+    }
+
+    kategoriEl.addEventListener("change", startListener);
 
     saveBtn.addEventListener("click", async () => {
+      const kategori = kategoriEl.value;
       const judul = judulInput.value.trim();
       const file = gambarInput.files[0];
 
@@ -347,26 +428,29 @@
       saveBtn.textContent = "Menyimpan...";
 
       try {
-        const gambarURL = await uploadGambar(file);
+        const { downloadURL, storagePath } = await uploadGambar(kategori, file);
 
-        await addDoc(collection(db, "berita"), {
+        await addDoc(collection(db, kategori), {
           judul: judul,
-          gambar: gambarURL,
+          gambar: downloadURL,
+          storagePath: storagePath,
           tanggal: serverTimestamp()
         });
 
         judulInput.value = "";
         gambarInput.value = "";
 
-        alert("Berita berhasil disimpan.");
+        alert("Data berhasil disimpan.");
       } catch (error) {
         console.error(error);
-        alert("Gagal menyimpan berita.");
+        alert("Gagal menyimpan data.");
       } finally {
         saveBtn.disabled = false;
-        saveBtn.textContent = "Simpan Berita";
+        saveBtn.textContent = "Simpan Konten";
       }
     });
+
+    startListener();
   </script>
 </body>
 </html>
