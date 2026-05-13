@@ -845,15 +845,16 @@
 
 .location-info{
   width:100%;
-  border-radius:30px 30px 0 0;
-  padding:14px 24px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(8,70,35,.96),
-      rgba(5,25,15,.96)
-    );
+  background:linear-gradient(135deg, #0b6b38, #062d18);
+  color:#d8e4dd;
+  border-radius:24px;
+  padding:22px;
+  display:grid;
+  gap:12px;
+  box-shadow:var(--shadow);
+  border:none;
+  backdrop-filter:none;
+}
 }
 
   border:1px solid rgba(255,255,255,.08);
