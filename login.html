@@ -35,17 +35,15 @@
       backdrop-filter: blur(10px);
     }
 
-    .logo {
-      width: 72px;
-      height: 72px;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #1f7a3d, #0b3d23);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      margin-bottom: 18px;
-    }
+   .logo{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  margin-bottom:18px;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
 
     h1 {
       font-size: 28px;
@@ -138,9 +136,9 @@
 </head>
 <body>
   <div class="card">
-    <div class="logo">☪</div>
+   <img src="logo.png" class="logo">
     <h1>Login Admin</h1>
-    <p>Masuk untuk mengelola dashboard pondok, berita, galeri, dan menu website.</p>
+    
 
     <form id="loginForm">
       <div class="input-group">
@@ -159,7 +157,7 @@
       <div class="success" id="successBox"></div>
     </form>
 
-    <div class="note">Pastikan Email/Password sudah aktif di Firebase Authentication.</div>
+   
   </div>
 
   <script type="module" src="firebase.js"></script>
