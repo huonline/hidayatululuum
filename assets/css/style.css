@@ -283,7 +283,7 @@
       background:
         linear-gradient(180deg, rgba(8, 24, 14, .18), rgba(8, 24, 14, .58)),
         url('background.jpeg') center/cover no-repeat;
-      border:1px solid rgba(255,255,255,.08);
+      
     }
 
     .hero-shell::before{
