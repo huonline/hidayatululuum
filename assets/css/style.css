@@ -561,7 +561,7 @@ footer{
     padding:16px;
   }
 
-  .content-box,
+  /* .content-box,
   .footer-card{
     padding:16px;
     border-radius:18px;
@@ -575,7 +575,7 @@ footer{
     border-radius:20px;
     padding:18px;
   }
-}
+} */
 
 @media (max-width:520px){
   .brand-title{
