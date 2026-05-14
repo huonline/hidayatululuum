@@ -1272,5 +1272,37 @@
       height:220px;
     }
   }
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:6px;
+  padding:6px;
+}
+
+.news-card{
+  position:relative;
+  aspect-ratio:1 / 1;
+  overflow:hidden;
+  border-radius:10px;
+  background:#000;
+  cursor:pointer;
+}
+
+.news-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.25s ease;
+}
+
+.news-card:hover img{
+  transform:scale(1.08);
+}
+@media(max-width:768px){
+  .news-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap:4px;
+  }
+}
 
 </style>
