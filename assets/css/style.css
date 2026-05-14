@@ -1305,4 +1305,326 @@
   object-fit:cover;
   display:block;
 }
+
+/* =========================
+   TAMBAHAN SECTION MENU
+   ========================= */
+
+.content-section{
+  display:none;
+}
+.content-section.active{
+  display:block;
+}
+
+/* Umum untuk card/grid isi menu */
+#profil .news-grid,
+#berita .news-grid,
+#program .news-grid,
+#kurikulum .news-grid,
+#galeri .news-grid,
+#santri .news-grid,
+#ppdb .news-grid,
+#donasi .news-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:18px;
+  padding:22px;
+}
+
+#profil .news-card,
+#berita .news-card,
+#program .news-card,
+#kurikulum .news-card,
+#galeri .news-card,
+#santri .news-card,
+#ppdb .news-card,
+#donasi .news-card{
+  overflow:hidden;
+  border-radius:20px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 14px 28px rgba(0,0,0,.12);
+  backdrop-filter:blur(10px);
+}
+
+#profil .news-card img,
+#berita .news-card img,
+#program .news-card img,
+#kurikulum .news-card img,
+#galeri .news-card img,
+#santri .news-card img,
+#ppdb .news-card img,
+#donasi .news-card img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  display:block;
+}
+
+/* Kalau card punya isi teks di bawah gambar */
+.news-card-body,
+.card-body{
+  padding:16px;
+}
+
+.news-card-body h3,
+.card-body h3,
+.news-card h3{
+  margin:0 0 8px;
+  font-size:18px;
+  line-height:1.3;
+  color:#fff;
+}
+
+.news-card-body p,
+.card-body p,
+.news-card p{
+  margin:0;
+  color:rgba(239,247,243,.88);
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* Profil */
+#profil .news-card{
+  background:rgba(255,255,255,.08);
+}
+#profil .news-card img{
+  height:260px;
+}
+
+/* Berita */
+#berita .news-card img{
+  height:220px;
+}
+
+/* Kurikulum */
+#kurikulum .content-box{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  padding:22px;
+  backdrop-filter:blur(12px);
+}
+
+#kurikulum .kurikulum-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px;
+  margin-top:18px;
+}
+
+#kurikulum .kurikulum-card{
+  padding:16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
+  border:1px dashed rgba(255,255,255,.18);
+  color:rgba(237,247,241,.92);
+  line-height:1.7;
+}
+
+#kurikulum .kurikulum-card strong{
+  display:block;
+  margin-bottom:6px;
+  color:#fff;
+  font-size:15px;
+}
+
+/* Program */
+#program .program-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px;
+  margin-top:18px;
+}
+
+#program .program-card{
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  color:rgba(237,247,241,.92);
+  line-height:1.7;
+}
+
+#program .program-card strong{
+  display:block;
+  margin-bottom:8px;
+  color:#fff;
+  font-size:16px;
+}
+
+/* Galeri */
+#galeri .gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:14px;
+  padding:22px;
+}
+
+#galeri .gallery-grid img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:18px;
+  display:block;
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+}
+
+/* Santri / Statistik */
+#santri .stats-grid{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(0, 1fr));
+  gap:12px;
+  padding:22px;
+}
+
+/* PPDB */
+#ppdb .ppdb-box{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  padding:22px;
+  backdrop-filter:blur(12px);
+}
+
+/* Donasi */
+#donasi .donation-wrap{
+  padding:22px;
+}
+
+/* Alamat / Lokasi */
+.location-full{
+  width:100%;
+  margin:0;
+  padding:0;
+}
+
+.location-wrap{
+  width:100%;
+  padding:0;
+}
+
+.location-info{
+  width:100%;
+  background:linear-gradient(135deg, #0b6b38, #062d18);
+  color:#d8e4dd;
+  border-radius:24px;
+  padding:22px;
+  display:grid;
+  gap:12px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 18px 40px rgba(0,0,0,.18);
+  backdrop-filter:none;
+}
+
+.location-info h3{
+  margin:0;
+  font-size:34px;
+  color:#fff;
+}
+
+.location-info p{
+  margin:0;
+  color:rgba(239,247,243,.92);
+  line-height:1.8;
+  font-size:14px;
+}
+
+.location-meta{
+  display:grid;
+  gap:10px;
+  margin-top:8px;
+}
+
+.meta-row{
+  padding:0;
+  background:none;
+  border:none;
+  border-radius:0;
+  color:#dff5e7;
+  line-height:1.6;
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+#alamat .section-card{
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+
+#alamat .location-info{
+  width:100%;
+  max-width:none;
+  background:linear-gradient(160deg, #0b6b38, #062d18, #03150b);
+  border:none;
+  box-shadow:0 18px 40px rgba(0,0,0,.28);
+}
+
+/* Footer */
+footer{
+  padding:26px 0 40px;
+}
+
+/* Responsive tambahan */
+@media (max-width: 768px){
+  #profil .news-grid,
+  #berita .news-grid,
+  #program .news-grid,
+  #kurikulum .news-grid,
+  #galeri .news-grid,
+  #santri .news-grid,
+  #ppdb .news-grid,
+  #donasi .news-grid{
+    grid-template-columns:1fr;
+    padding:16px;
+  }
+
+  #profil .news-card img,
+  #berita .news-card img,
+  #program .news-card img,
+  #kurikulum .news-card img,
+  #galeri .news-card img,
+  #santri .news-card img,
+  #ppdb .news-card img,
+  #donasi .news-card img{
+    height:220px;
+  }
+
+  #santri .stats-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  .location-info{
+    border-radius:22px;
+    padding:18px;
+  }
+
+  .location-info h3{
+    font-size:24px;
+  }
+}
+
+@media (max-width: 520px){
+  #profil .news-card img,
+  #berita .news-card img,
+  #program .news-card img,
+  #kurikulum .news-card img,
+  #galeri .news-card img,
+  #santri .news-card img,
+  #ppdb .news-card img,
+  #donasi .news-card img{
+    height:200px;
+  }
+
+  #santri .stats-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
