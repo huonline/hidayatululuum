@@ -13,7 +13,7 @@
   --max:1180px;
 }
 
-/* *{
+*{
   box-sizing:border-box;
 } */
 
@@ -340,7 +340,7 @@ section.block{
   padding:0;
 }
 
-/* .section-card{
+ .section-card{
   position:relative;
   overflow:hidden;
   background:transparent;
@@ -486,7 +486,7 @@ footer{
   background:linear-gradient(135deg, #0b6b38, #062d18);
   color:#d8e4dd;
   border-radius:24px;
-  padding:22px;
+  padding:auto;
   display:grid;
   gap:12px;
   text-align:center;
