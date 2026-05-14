@@ -1298,11 +1298,12 @@
 .news-card:hover img{
   transform:scale(1.08);
 }
-@media(max-width:768px){
-  .news-grid{
-    grid-template-columns:repeat(2, 1fr);
-    gap:4px;
-  }
+@media (max-width: 360px){
+  .news-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 361px) and (max-width: 768px){
+  .news-grid{ grid-template-columns: repeat(3, 1fr); }
 }
 
 .lightbox{
