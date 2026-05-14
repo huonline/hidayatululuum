@@ -55,7 +55,7 @@ img{
 .container{
   width:100%;
   max-width:var(--max);
-  margin:0;
+  margin:24;
   padding:0;
 }
 
