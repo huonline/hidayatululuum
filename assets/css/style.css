@@ -13,9 +13,9 @@
   --max:1180px;
 }
 
-*{
+/* *{
   box-sizing:border-box;
-}
+} */
 
 html{
   scroll-behavior:smooth;
@@ -340,14 +340,14 @@ section.block{
   padding:0;
 }
 
-.section-card{
+/* .section-card{
   position:relative;
   overflow:hidden;
   background:transparent;
   border:none;
   border-radius:var(--radius);
   box-shadow:none;
-  backdrop-filter:none;
+  backdrop-filter:none; */
 }
 
 .section-card::before{
