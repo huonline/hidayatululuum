@@ -256,6 +256,11 @@
   line-height:1.4;
 }
 
+@media (max-width: 1024px){
+  .stats-grid{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+  }
+
 /* Content grids: Profil, Berita, Program, PPDB, Visi Misi */
 .content-section .news-grid{
   display:grid;
@@ -540,10 +545,5 @@
   cursor:pointer;
 }
 
-/* Responsive */
-@media (max-width: 1024px){
-  .stats-grid{
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-  }
 
   
