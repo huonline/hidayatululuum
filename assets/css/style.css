@@ -55,8 +55,8 @@ img{
 .container{
   width:100%;
   max-width:var(--max);
-  margin:24;
-  padding:0;
+  margin:auto;
+  padding:0 16px;
 }
 
 /* Top bar */
