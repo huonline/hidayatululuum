@@ -943,10 +943,10 @@
       grid-template-columns:1fr;
     }
   } */
-
+/* 
   @media (max-width: 768px){
     .container{
-      width:min(var(--max), calc(100% - 20px));
+      width:min(var(--max), calc(100% - 20px)); */
     }
 
     .topbar-inner{height:70px}
