@@ -1,1 +1,65 @@
+.hero{
+  width:100%;
+  padding:0;
+}
+.hero-shell{
+  width:100%;
 
+  border-radius:0 0 36px 36px;
+
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(180deg, rgba(8, 24, 14, .18), rgba(8, 24, 14, .58)),
+    url('../../background.jpeg') center/cover no-repeat;
+}
+
+
+.hero-shell::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0)),
+    radial-gradient(circle at top left, rgba(11,107,56,.14), transparent 24%);
+
+  pointer-events:none;
+}
+.hero-inner{
+  width:100%;
+
+  padding:70px 24px 55px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  position:relative;
+  z-index:1;
+}
+
+.hero-brand{
+  text-align:center;
+  margin:0 auto;
+  max-width:1000px;
+}
+
+.hero-logo{
+  width:78px;
+  height:78px;
+
+  border-radius:24px;
+  object-fit:cover;
+
+  background:transparent;
+  border:none;
+  box-shadow:none;
+
+  display:block;
+  margin:0 auto 20px;
+}
