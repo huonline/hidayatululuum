@@ -235,17 +235,122 @@
     </div>
   </div>
 
-  <!-- Taruh di bagian bawah file HTML Admin kamu, sebelum </body> -->
-<script type="module">
+
+  <script type="module">
   // 1. Hubungkan ke file firebase.js yang ada di folder asset
   import { db } from "./asset/js/firebase.js";
   
-  // 2. Ambil fungsi untuk menyimpan data dari Firebase
-  import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.x/firebase-firestore.js";
+  // 2. Ambil fungsi untuk CRUD dari Firebase
+  import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.x/firebase-firestore.js";
 
-  // Di sini nanti tempat kamu menaruh fungsi upload Cloudinary 
-  // yang langsung otomatis menyimpan URL-nya ke Firebase 'db' di atas.
+  // Tangkap elemen HTML Admin
+  const btnSave = document.getElementById('saveBtn');
+  const inputKategori = document.getElementById('kategori');
+  const inputJudul = document.getElementById('judul');
+  const inputGambar = document.getElementById('gambar');
+  
+  const kontenList = document.getElementById('kontenList');
+  const currentInfo = document.getElementById('currentInfo');
+
+  // ==========================================
+  // FITUR 1: UPLOAD KE CLOUDINARY & SIMPAN KE FIREBASE
+  // ==========================================
+  btnSave.addEventListener('click', async () => {
+    const file = inputGambar.files[0];
+    const judul = inputJudul.value;
+    const kategori = inputKategori.value; // Nilai ini: berita, galeri, dll.
+
+    // Validasi sederhana
+    if (!file || !judul) {
+      return alert("Judul dan gambar wajib diisi!");
+    }
+
+    try {
+      // Ubah status tombol
+      btnSave.innerText = "Sedang Mengupload...";
+      btnSave.disabled = true;
+
+      // --- A: Upload ke Cloudinary ---
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'admin_upload'); // Preset kamu
+      formData.append('cloud_name', 'dntmeiqhg');       // Cloud Name kamu
+
+      const cloudResponse = await fetch('https://api.cloudinary.com/v1_1/dntmeiqhg/image/upload', {
+        method: 'POST',
+        body: formData
+      });
+      
+      const cloudData = await cloudResponse.json();
+      const URLCloudinary = cloudData.secure_url;
+
+      // --- B: Simpan ke Firebase ---
+      // collection(db, kategori) artinya gambar akan disimpan ke folder 'berita', 'galeri', dll sesuai pilihan dropdown
+      await addDoc(collection(db, kategori), {
+        title: judul,
+        image_url: URLCloudinary,
+        createdAt: serverTimestamp()
+      });
+
+      alert("Selesai! Konten berhasil ditambahkan.");
+      
+      // Bersihkan form setelah sukses
+      inputJudul.value = "";
+      inputGambar.value = "";
+      btnSave.innerText = "Simpan Konten";
+      btnSave.disabled = false;
+
+    } catch (error) {
+      console.error("Gagal memproses:", error);
+      alert("Terjadi kesalahan sistem.");
+      btnSave.innerText = "Simpan Konten";
+      btnSave.disabled = false;
+    }
+  });
+
+  // ==========================================
+  // FITUR 2: MENAMPILKAN DAFTAR KONTEN OTOMATIS
+  // ==========================================
+  // Fungsi ini membaca data dari Firebase berdasarkan dropdown kategori yang dipilih
+  function loadDaftarKonten() {
+    const kategori = inputKategori.value;
+    const namaKategori = inputKategori.options[inputKategori.selectedIndex].text;
+    currentInfo.innerText = `Menampilkan: ${namaKategori}`;
+
+    const q = query(collection(db, kategori), orderBy("createdAt", "desc"));
+    
+    // onSnapshot membuat data langsung tampil tanpa refresh
+    onSnapshot(q, (snapshot) => {
+      kontenList.innerHTML = ""; 
+
+      if (snapshot.empty) {
+        kontenList.innerHTML = `<div class="empty-state">Belum ada data di kategori ${namaKategori}.</div>`;
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        
+        // Render ke kotak-kotak desain HTML-mu
+        const cardHtml = `
+          <div class="item-card">
+            <img src="${data.image_url}" alt="Gambar Konten">
+            <div class="item-body">
+              <h3>${data.title}</h3>
+            </div>
+          </div>
+        `;
+        kontenList.innerHTML += cardHtml;
+      });
+    });
+  }
+
+  // Panggil fungsi tampilkan konten saat halaman pertama kali dibuka
+  loadDaftarKonten();
+
+  // Panggil fungsi lagi jika admin mengganti pilihan dropdown (misal dari Berita ke Galeri)
+  inputKategori.addEventListener('change', loadDaftarKonten);
+
 </script>
-
 </body>
 </html>
