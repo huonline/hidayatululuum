@@ -14,8 +14,13 @@
 }
 
 .hero-shell::before{
+  width:100%;
+  aspect-ratio:16/9;
+
+  border-radius:40px;
+  overflow:hidden;
   content:"";
-  position:absolute;
+  position:relative;
   inset:0;
   background:
     linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0)),
