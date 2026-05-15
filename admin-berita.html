@@ -235,16 +235,17 @@
     </div>
   </div>
 
+  <!-- Taruh di bagian bawah file HTML Admin kamu, sebelum </body> -->
+<script type="module">
+  // 1. Hubungkan ke file firebase.js yang ada di folder asset
+  import { db } from "./asset/js/firebase.js";
   
+  // 2. Ambil fungsi untuk menyimpan data dari Firebase
+  import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.x/firebase-firestore.js";
 
-
-  <input type="file" id="imageInput">
-
-  <button id="uploadBtn">
-    Upload
-  </button>
-
-  <script src="assets/js/cloudinary.js"></script>
+  // Di sini nanti tempat kamu menaruh fungsi upload Cloudinary 
+  // yang langsung otomatis menyimpan URL-nya ke Firebase 'db' di atas.
+</script>
 
 </body>
 </html>
