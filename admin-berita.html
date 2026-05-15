@@ -295,16 +295,22 @@
     const kategori = inputKategori.value;
     const q = query(collection(db, kategori), orderBy("createdAt", "desc"));
     
-    onSnapshot(q, (snapshot) => {
-      kontenList.innerHTML = "";
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        kontenList.innerHTML += `
-          <div class="item-card">
-            <img src="${data.image_url}">
-            <div class="item-body"><h3>${data.title}</h3></div>
-          </div>`;
-      });
+  // Ganti bagian render gambar di onSnapshot kamu (baik di Admin maupun Web Publik)
+snapshot.forEach((doc) => {
+  const data = doc.data();
+  
+  // Pastikan URL-nya lengkap. Jika di Firebase cuma tersimpan "namafile.jpg", 
+  // kita harus tambahkan alamat Cloudinary di depannya.
+  const linkGambar = data.image_url.includes('http') 
+                     ? data.image_url 
+                     : `https://res.cloudinary.com/dntmeiqhg/image/upload/${data.image_url}`;
+
+  kontenList.innerHTML += `
+    <div class="item-card">
+      <img src="${linkGambar}" onerror="this.src='https://placehold.co/400x300?text=Gambar+Tidak+Ditemukan'">
+      <div class="item-body"><h3>${data.title}</h3></div>
+    </div>`;
+});
     });
   }
 
