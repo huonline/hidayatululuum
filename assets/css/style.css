@@ -402,7 +402,7 @@ section.block{
 }
 
 /* /* Content pages th */
-at switch based on menu */
+/* at switch based on menu */ 
 .content-section{
   display:none;
 }
@@ -478,7 +478,6 @@ at switch based on menu */
   color:#fff;
   margin-bottom:6px;
   font-size:15px;
-
 /* Footer */
 footer{
   padding:26px 0 40px;
