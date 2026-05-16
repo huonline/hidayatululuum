@@ -1,17 +1,17 @@
 .stats-wrap{
   position:relative;
   z-index:1;
-  padding:18px 22px 22px;
+  padding:12px;
 }
 
 .stats-grid{
   display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:12px;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:10px;
 }
 
 .stat{
-  padding:18px 14px;
+  padding:18px 8px;
   background:linear-gradient(135deg, #0b6b38, #062d18);
   border:none;
   border-radius:18px;
@@ -33,7 +33,7 @@
 .stat-label{
   color:rgba(237,247,241,.84);
   font-weight:700;
-  font-size:13px;
+  font-size:12px;
   line-height:1.4;
 }
 
@@ -314,9 +314,11 @@
 }
 
 /* Responsive */
-@media (max-width:1024px){
+@media (max-width:768px){
   .stats-grid{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-template-columns:repeat(2, 1fr);
+    gap1:10px;
+    
   }
 }
 
